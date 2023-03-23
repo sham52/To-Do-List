@@ -9,16 +9,21 @@ const Form = ({ setInput, input, setTodos, setStatus }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     //Adds new todo
-    setTodos((prev) => [
-      ...prev,
-      {
-        text: input,
-        completed: false,
-        id: uuidv4(),
-        isEditing: false,
-      },
-    ]);
+
+    const newTodo = {
+      text: input,
+      completed: false,
+      id: uuidv4(),
+      isEditing: false,
+    };
+    setTodos((prev) => [...prev, newTodo]);
     setInput("");
+    const todosFromLocalStorage =
+      JSON.parse(localStorage.getItem("todos")) || [];
+    localStorage.setItem(
+      "todos",
+      JSON.stringify([...todosFromLocalStorage], newTodo)
+    );
   };
 
   const statusHandler = (e) => {

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { BsFillCheckSquareFill, BsBackspaceFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 const Todo = ({ setTodos, todos, todo }) => {
+  const [edit, setEdit] = useState("");
+
   const deleteHandler = () => {
     setTodos(todos.filter((element) => element.id !== todo.id));
   };
@@ -20,8 +22,26 @@ const Todo = ({ setTodos, todos, todo }) => {
 
   const editTodo = (id) => {
     setTodos(
+      todos.map((todo) => todo.id === id ? { ...todo, isEditing: true } : todo)
+    );
+    setEdit(todo.text);
+  };
+
+  const backEditTodo = (id) => {
+    setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+        todo.id === id ? { ...todo, isEditing: false } : todo
+      )
+    );
+  };
+  const handleChange = (e) => {
+    setEdit(e.target.value);
+  };
+  const handleUpdate = (e, id) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, text: edit, isEditing: false } : todo
       )
     );
   };
@@ -64,15 +84,22 @@ const Todo = ({ setTodos, todos, todo }) => {
           <div className="flex flex-row w-[100%]">
             <input
               required
-              onChange={handleEdit}
+              value={edit}
+              onChange={handleChange}
               type="text"
               className="shadow appearance-none border rounded-tl-lg rounded-bl-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
-            <button className="w-[35%] bg-blue-500 hover:bg-blue-700 text-sm  text-white font-bold py-2 px-4 rounded-tr-lg rounded-br-lg focus:shadow-outline focus:outline-none transition-all duration-200 ease-in">
-              Edit
+            <button
+              onClick={(e) => handleUpdate(e, todo.id)}
+              className="w-[35%] bg-blue-500 hover:bg-blue-700 text-sm  text-white font-bold py-2 px-4 rounded-tr-lg rounded-br-lg focus:shadow-outline focus:outline-none transition-all duration-200 ease-in"
+            >
+              Update
             </button>
           </div>
-          <button className="text-white cursor-pointer ">
+          <button
+            onClick={() => backEditTodo(todo.id)}
+            className="text-white cursor-pointer "
+          >
             <BsBackspaceFill size={25} />
           </button>
         </section>
