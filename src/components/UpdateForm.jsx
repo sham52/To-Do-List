@@ -20,7 +20,7 @@ const UpdateForm = ({ todo, todos, setTodos, edit, setEdit }) => {
     );
   };
   return (
-    <section className=" flex flex-row min-w-[386px] gap-2 bg-slate-600 px-4 py-2 my-4 rounded-lg justify-between items-center">
+    <form className=" flex flex-row min-w-[386px] gap-2 bg-slate-600 px-4 py-2 my-4 rounded-lg justify-between items-center">
       <div className="flex flex-row w-[100%]">
         <input
           required
@@ -42,7 +42,7 @@ const UpdateForm = ({ todo, todos, setTodos, edit, setEdit }) => {
       >
         <BsBackspaceFill size={25} />
       </button>
-    </section>
+    </form>
   );
 };
 
