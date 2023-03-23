@@ -7,7 +7,7 @@ const TodoList = ({ todos, setTodos, filteredTodos }) => {
   return (
     <div
       name="todo-container"
-      className="flex justify-center items-center min-h-[177px] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4 w-full "
+      className="flex flex-col gap-2 justify-center items-center min-h-[177px] bg-white shadow-md rounded px-8  pt-6 pb-8 mb-4 w-full "
     >
       {todos.length ? (
         <div>
@@ -28,10 +28,11 @@ const TodoList = ({ todos, setTodos, filteredTodos }) => {
           </section>
         </div>
       ) : (
-        <div className="bg-slate-600 px-4 py-2 h-10 text-white rounded-lg text-center text-xl">
+        <div className=" bg-slate-600 px-4 py-2 h-10 text-white rounded-lg text-center text-xl">
           <h3 className="">There is no todo</h3>
         </div>
       )}
+      <p className="text-center ">by Sham</p>
     </div>
   );
 };

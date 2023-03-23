@@ -10,6 +10,21 @@ function App() {
   const [status, setStatus] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState([]);
 
+
+
+  useEffect(() => {
+    const getLocalTodos = () => {
+      let localTodos = localStorage.getItem("todos");
+
+      if (localTodos) {
+        return JSON.parse(localStorage.getItem("todos"));
+      } else {
+        return [];
+      }
+    };
+    setTodos(getLocalTodos());
+  }, []);
+  
   useEffect(() => {
     const filterHandler = () => {
       switch (status) {
@@ -30,18 +45,6 @@ function App() {
     saveLocalTodos();
     filterHandler();
   }, [todos, status]);
-  useEffect(() => {
-    const getLocalTodos = () => {
-      let localTodos = localStorage.getItem("todos");
-
-      if (localTodos) {
-        return JSON.parse(localStorage.getItem("todos"));
-      } else {
-        return [];
-      }
-    };
-    getLocalTodos();
-  }, []);
 
   //Logs
   console.log("Todos: " + JSON.stringify(todos));
