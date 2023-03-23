@@ -21,7 +21,7 @@ const TodoList = ({ todos, setTodos, filteredTodos }) => {
               />
             ))}
           </ul>
-          <section className="bg-slate-600 rounded-lg text-center text-white font-bold">
+          <section className="min-w-[300px] bg-slate-600 rounded-lg text-center text-white font-bold">
             <p>
               {completedCounter} of {todos.length} is completed
             </p>
