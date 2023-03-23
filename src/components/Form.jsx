@@ -1,4 +1,6 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
+
 const Form = ({ setInput, input, setTodos, setStatus }) => {
   const inputHandler = (e) => {
     setInput(e.target.value);
@@ -6,9 +8,15 @@ const Form = ({ setInput, input, setTodos, setStatus }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    //Adds new todo
     setTodos((prev) => [
       ...prev,
-      { text: input, completed: false, id: Math.random() * 1000 },
+      {
+        text: input,
+        completed: false,
+        id: uuidv4(),
+        isEditing: false,
+      },
     ]);
     setInput("");
   };

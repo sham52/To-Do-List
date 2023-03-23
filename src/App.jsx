@@ -27,7 +27,6 @@ function App() {
     const saveLocalTodos = () => {
       localStorage.setItem("todos", JSON.stringify(todos));
     };
-//selam
     saveLocalTodos();
     filterHandler();
   }, [todos, status]);
